@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HN Agri Business Corporation - Corporate Portfolio</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    // Custom tailwind configuration to support theme variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: 'var(--color-brand-50)',
+              100: 'var(--color-brand-100)',
+              200: 'var(--color-brand-200)',
+              300: 'var(--color-brand-300)',
+              400: 'var(--color-brand-400)',
+              500: 'var(--color-brand-500)',
+              600: 'var(--color-brand-600)',
+              700: 'var(--color-brand-700)',
+              800: 'var(--color-brand-800)',
+              900: 'var(--color-brand-900)',
+            },
+            accent: {
+              50: 'var(--color-accent-50)',
+              100: 'var(--color-accent-100)',
+              200: 'var(--color-accent-200)',
+              300: 'var(--color-accent-300)',
+              400: 'var(--color-accent-400)',
+              500: 'var(--color-accent-500)',
+              600: 'var(--color-accent-600)',
+              700: 'var(--color-accent-700)',
+              800: 'var(--color-accent-800)',
+              900: 'var(--color-accent-900)',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Premium visual effects */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    .glass-admin {
+      background: rgba(24, 24, 27, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+    .custom-scrollbar-dark::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar-dark::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .custom-scrollbar-dark::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 4px;
+    }
+    .timeline-line {
+      position: absolute;
+      left: 17px;
+      top: 36px;
+      bottom: -16px;
+      width: 2px;
+      background: var(--color-brand-200);
+    }
+    .timeline-item:last-child .timeline-line {
+      display: none;
+    }
+  </style>
+</head>
+
+<body 
+  x-data="siteApp()" 
+  x-init="init()"
+  class="font-sans text-stone-700 bg-stone-50 antialiased selection:bg-brand-500 selection:text-white"
+  :style="themeStyles"
+>
+
+  <!-- SVG Sprite Sheet -->
+  <svg class="hidden">
+    <g id="icon-leaf"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 0 8.5C17 15 15 20 11 20z"></path><path d="M19 2c-2.26 4.33-5.27 7.14-8 10"></path></g>
+    <g id="icon-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></g>
+    <g id="icon-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></g>
+    <g id="icon-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></g>
+    <g id="icon-close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></g>
+    <g id="icon-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></g>
+    <g id="icon-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></g>
+    <g id="icon-check"><polyline points="20 6 9 17 4 12"></polyline></g>
+    <g id="icon-refresh"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></g>
+    <g id="icon-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></g>
+    <g id="icon-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></g>
+    <g id="icon-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></g>
+    <g id="icon-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></g>
+    <g id="icon-package"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><polygon points="12 22.08 12 12 3 6.92 3 17.08 12 22.08"></polygon><polygon points="12 22.08 21 17.08 21 6.92 12 12 12 22.08"></polygon><polygon points="12 12 21 6.92 12 1.84 3 6.92 12 12"></polygon><line x1="12" y1="5.12" x2="12" y2="12"></line></g>
+    <g id="icon-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></g>
+  </svg>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="fixed top-0 inset-x-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="w-16 h-16 rounded-xl overflow-hidden shadow-md shadow-brand-600/10 group-hover:scale-105 transition-transform duration-300 flex items-center justify-center bg-white border border-stone-200 p-0.5">
+          <img src="logo.png" alt="HNABC Logo" class="w-full h-full object-contain">
+        </div>
+        <span class="font-display font-bold text-lg tracking-tight text-stone-900 leading-tight" x-text="data.name">HN Agri Business Corporation</span>
+      </a>
+
+      <!-- Desktop Navigation links -->
+      <nav class="hidden lg:flex items-center gap-7 font-medium text-stone-600 text-sm">
+        <a href="#about" class="hover:text-brand-600 transition-colors duration-200">About & Leadership</a>
+        <a href="#experience" class="hover:text-brand-600 transition-colors duration-200">Professional Matrix</a>
+        <a href="#products" class="hover:text-brand-600 transition-colors duration-200">Product Catalog</a>
+        <a href="#services" class="hover:text-brand-600 transition-colors duration-200">Services & Values</a>
+        <a href="#contact" class="hover:text-brand-600 transition-colors duration-200">Contact</a>
+      </nav>
+
+      <!-- Admin Button -->
+      <div class="flex items-center gap-4">
+        <button 
+          @click="window.location.hash = '#admin'"
+          class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-stone-900 text-white font-medium text-xs tracking-wider uppercase hover:bg-brand-600 hover:shadow-lg hover:shadow-brand-600/20 active:scale-95 transition-all duration-300"
+        >
+          <svg class="w-4 h-4 fill-none stroke-current stroke-2"><use href="#icon-settings"></use></svg>
+          <span>Admin Controls</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-28 pb-16 bg-stone-900">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1600646999394-b8a9bdb7e6a7?w=1800&auto=format&fit=crop" alt="Rice fields" class="w-full h-full object-cover opacity-30 object-center rounded-xl shadow-inner">
+      <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-900/85 to-transparent"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
+      <!-- Centered Logo -->
+      <div class="flex justify-center mb-6">
+        <div class="w-32 h-32 rounded-2xl overflow-hidden bg-white/95 border border-white/20 p-1.5 shadow-2xl hover:scale-105 transition-transform duration-300">
+          <img src="logo.png" alt="HNABC Logo" class="w-full h-full object-contain">
+        </div>
+      </div>
+
+      <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 mb-8 backdrop-blur-md">
+        <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+        <span class="text-xs font-semibold uppercase tracking-widest text-brand-400" x-text="data.type + ' • Est. ' + data.established">Private Company • Est. 2018</span>
+      </div>
+      
+      <h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.1] mb-6" x-text="data.name">
+        HN Agri Business Corporation
+      </h1>
+      
+      <p class="max-w-3xl mx-auto text-lg md:text-xl text-stone-300 font-light leading-relaxed mb-10">
+        Under the visionary leadership of <strong class="text-white font-semibold" x-text="data.proprietor">Md. Abu Sayem</strong> (<span x-text="data.title">Chairman</span>), providing innovative agricultural trading, commercial management, and project consultancy.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#about" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-600 text-white font-semibold shadow-lg shadow-brand-600/25 hover:bg-brand-500 hover:translate-y-[-2px] hover:shadow-xl hover:shadow-brand-600/35 transition-all duration-300 text-center">
+          Explore Our Profile
+        </a>
+        <a href="#products" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 text-white font-semibold backdrop-blur-sm border border-white/10 hover:bg-white/20 hover:border-white/20 transition-all duration-300 text-center">
+          Browse Products
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT & LEADERSHIP SECTION -->
+  <section id="about" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-16 items-start">
+      
+      <!-- Company Overview (Left side: 7cols) -->
+      <div class="lg:col-span-7 space-y-8">
+        <div>
+          <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Corporate Profile</span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-stone-900 tracking-tight mt-3 mb-6">
+            Leading Agri-Business Excellence
+          </h2>
+          <div class="w-20 h-1.5 bg-brand-500 rounded-full mb-8"></div>
+          <p class="text-lg text-stone-600 leading-relaxed font-light mb-6" x-text="data.about">
+            HN Agri Business Corporation is not just an agricultural enterprise; it's a testament to innovation, sustainability, and the relentless pursuit of excellence.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="p-6 rounded-3xl bg-brand-50 border border-brand-100/50 shadow-sm">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-200/50 text-[10px] font-bold text-brand-800 uppercase tracking-wider mb-4">
+              <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-2"><use href="#icon-leaf"></use></svg>
+              Vision Statement
+            </span>
+            <p class="text-sm text-stone-600 font-light leading-relaxed" x-text="data.vision">
+              To play a pivotal role in advancing national agriculture...
+            </p>
+          </div>
+
+          <div class="p-6 rounded-3xl bg-accent-50 border border-accent-100/50 shadow-sm">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent-200/50 text-[10px] font-bold text-accent-800 uppercase tracking-wider mb-4">
+              <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-2"><use href="#icon-award"></use></svg>
+              Our Commitment
+            </span>
+            <p class="text-sm text-stone-600 font-light leading-relaxed" x-text="data.commitment">
+              We are committed to promoting sustainable agriculture practices...
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chairman & Strengths Profile (Right side: 5cols) -->
+      <div class="lg:col-span-5 p-8 rounded-3xl bg-white border border-stone-200 shadow-md">
+        <div class="flex items-center gap-4 mb-6 pb-6 border-b border-stone-100">
+          <div class="w-14 h-14 rounded-2xl bg-brand-900 text-white flex items-center justify-center font-display font-bold text-2xl shadow-lg">
+            AS
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-xl text-stone-900" x-text="data.proprietor">Md. Abu Sayem</h3>
+            <span class="text-xs font-semibold text-brand-600 uppercase tracking-wider" x-text="data.title + ' & Founder'">Chairman & Founder</span>
+          </div>
+        </div>
+
+        <h4 class="text-xs font-bold uppercase tracking-wider text-stone-400 mb-4">Core Strengths & Expertise</h4>
+        <div class="flex flex-wrap gap-2">
+          <template x-for="(exp, index) in data.expertise" :key="index">
+            <span class="px-3 py-1.5 rounded-lg bg-stone-100 text-stone-600 text-xs font-medium hover:bg-brand-50 hover:text-brand-700 transition-colors" x-text="exp">
+              FMCG
+            </span>
+          </template>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TIMELINE MATRIX SECTION -->
+  <section id="experience" class="py-24 bg-stone-100 border-y border-stone-200/50">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Background Foundation</span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-stone-900 tracking-tight mt-3 mb-6">
+          Professional Experience Matrix
+        </h2>
+        <p class="text-stone-500 font-light">
+          A review of corporate and operational leadership milestones that frame HNABC's high-tech consulting capability.
+        </p>
+      </div>
+
+      <!-- Experience timeline -->
+      <div class="space-y-8 relative">
+        <template x-for="(job, index) in data.journey" :key="index">
+          <div class="timeline-item flex gap-6 relative pl-2 md:pl-0">
+            <!-- Timeline Line Indicator -->
+            <div class="timeline-line"></div>
+            
+            <!-- Bullet Point Icon -->
+            <div class="w-9 h-9 rounded-full bg-brand-50 border-2 border-brand-500 flex items-center justify-center text-brand-600 z-10 shrink-0">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2"><use href="#icon-briefcase"></use></svg>
+            </div>
+
+            <!-- Content Card -->
+            <div class="flex-1 p-6 rounded-3xl bg-white border border-stone-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
+                <div>
+                  <h3 class="font-display font-bold text-lg text-stone-900" x-text="job.role">Role Title</h3>
+                  <span class="text-xs font-semibold text-brand-600 uppercase tracking-wider" x-text="job.company">Company Name</span>
+                </div>
+                <span class="inline-flex px-3 py-1 rounded-full bg-stone-100 text-stone-500 text-xs font-semibold tracking-wider self-start" x-text="job.period">2018 - Present</span>
+              </div>
+              <p class="text-stone-600 text-sm font-light leading-relaxed" x-text="job.details">
+                Provide innovative technology support services...
+              </p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT PORTFOLIO CATALOG (Iterates all 6 products) -->
+  <section id="products" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Trade Commodities</span>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl text-stone-900 tracking-tight mt-3 mb-6">
+        Full Product Catalog
+      </h2>
+      <p class="text-stone-500 font-light">
+        Discover our dynamic agricultural yield portfolio, distributed nationwide under strict quality parameters.
+      </p>
+    </div>
+
+    <!-- 6 Products Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <template x-for="(prod, index) in data.products" :key="prod.id">
+        <div class="group p-8 rounded-xl bg-white border border-stone-200 shadow-inner hover:shadow-xl hover:scale-105 transition-transform duration-500">
+          <div class="flex items-center justify-between mb-6">
+            <div class="w-24 h-24 rounded-xl overflow-hidden shadow-inner transition-transform duration-500 hover:scale-105">
+              <img :src="prod.image" alt="Product image" class="w-full h-full object-cover rounded-xl shadow-inner" />
+            </div>
+            <span class="text-xs font-bold text-stone-300" x-text="'CAT-0' + (index + 1)">CAT-01</span>
+          </div>
+          <h3 class="font-display font-bold text-lg text-stone-900 mb-3 group-hover:text-brand-700 transition-colors" x-text="prod.name">Premium Quality Rice</h3>
+          <p class="text-stone-500 font-light text-sm leading-relaxed" x-text="prod.description">
+            Description of the high-quality product metrics.
+          </p>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- SERVICES & VALUE PILLARS -->
+  <section id="services" class="py-24 bg-stone-100 border-t border-stone-200/50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-12 gap-16 items-start">
+        
+        <!-- Professional Services (Left: 6cols) -->
+        <div class="lg:col-span-6 space-y-8">
+          <div>
+            <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Solutions & Consulting</span>
+            <h2 class="font-display font-bold text-3xl text-stone-900 mt-2 mb-4">Professional Services</h2>
+            <p class="text-stone-500 font-light text-sm">Industrial project appraisals, detailed strategic business planning, and market studies.</p>
+          </div>
+
+          <div class="space-y-4">
+            <template x-for="srv in data.services" :key="srv.id">
+              <div class="p-6 rounded-3xl bg-white border border-stone-200 flex gap-4">
+                <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 fill-none stroke-current stroke-2"><use href="#icon-star"></use></svg>
+                </div>
+                <div>
+                  <h3 class="font-display font-bold text-base text-stone-900 mb-2" x-text="srv.title">Project Appraisal</h3>
+                  <p class="text-stone-500 font-light text-xs leading-relaxed" x-text="srv.description">Assisting in evaluating agricultural projects...</p>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Value Pillars (Right: 6cols) -->
+        <div class="lg:col-span-6 space-y-8">
+          <div>
+            <span class="text-xs font-bold text-accent-600 uppercase tracking-widest">Competitive Advantage</span>
+            <h2 class="font-display font-bold text-3xl text-stone-900 mt-2 mb-4">Why Choose Us?</h2>
+            <p class="text-stone-500 font-light text-sm">Our dedication to operational standards guarantees reliable output at every lifecycle step.</p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <template x-for="pillar in data.whyChooseUs" :key="pillar.title">
+              <div class="p-6 rounded-3xl bg-white border border-stone-200 shadow-sm">
+                <h3 class="font-display font-bold text-base text-stone-900 mb-2" x-text="pillar.title">Quality Assurance</h3>
+                <p class="text-stone-500 font-light text-xs leading-relaxed" x-text="pillar.desc">We adhere to stringent quality standards...</p>
+              </div>
+            </template>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT & LOCATION -->
+  <section id="contact" class="py-24 bg-stone-900 text-white relative overflow-hidden">
+    <div class="absolute w-96 h-96 bg-brand-600/10 rounded-full blur-3xl -top-24 -left-24"></div>
+    <div class="absolute w-96 h-96 bg-accent-500/5 rounded-full blur-3xl -bottom-24 -right-24"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-start mb-16">
+        <div>
+          <span class="text-xs font-bold text-brand-400 uppercase tracking-widest">Inquiries & Partnerships</span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl tracking-tight mt-3 mb-6">
+            Get In Touch
+          </h2>
+          <p class="text-stone-400 font-light leading-relaxed mb-8">
+            Connect directly with Md. Abu Sayem or our commercial trading department to discuss agro-processing setups, bulk commodity sales, or green projects.
+          </p>
+
+          <!-- Contact Matrix -->
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-400">
+                <svg class="w-5 h-5 fill-none stroke-current stroke-2"><use href="#icon-mail"></use></svg>
+              </div>
+              <div>
+                <span class="block text-xs text-stone-500 uppercase tracking-widest font-semibold">Direct Email</span>
+                <a href="#" class="font-medium text-stone-200 hover:text-white transition-colors" x-text="data.email">sayemrscbd@gmail.com</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-400">
+                <svg class="w-5 h-5 fill-none stroke-current stroke-2"><use href="#icon-phone"></use></svg>
+              </div>
+              <div>
+                <span class="block text-xs text-stone-500 uppercase tracking-widest font-semibold">Phone Contact</span>
+                <span class="font-medium text-stone-200" x-text="data.phone">+8801714718312</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-400">
+                <svg class="w-5 h-5 fill-none stroke-current stroke-2"><use href="#icon-map-pin"></use></svg>
+              </div>
+              <div>
+                <span class="block text-xs text-stone-500 uppercase tracking-widest font-semibold">Corporate Office</span>
+                <span class="font-medium text-stone-200 text-sm" x-text="data.location">Kushtia, Bangladesh</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Form -->
+        <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
+          <h3 class="font-display font-semibold text-lg mb-6">Send A Message</h3>
+          <form class="space-y-4" @submit.prevent="pushToast('success', 'Message sent successfully! Chairman Sayem will receive your notification.')">
+            <div>
+              <label class="block text-xs text-stone-400 font-semibold mb-2">Full Name</label>
+              <input type="text" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 focus:bg-white/10 transition-all text-white" placeholder="Md. Rahim" required>
+            </div>
+            <div>
+              <label class="block text-xs text-stone-400 font-semibold mb-2">Email Address</label>
+              <input type="email" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 focus:bg-white/10 transition-all text-white" placeholder="rahim@gmail.com" required>
+            </div>
+            <div>
+              <label class="block text-xs text-stone-400 font-semibold mb-2">Message</label>
+              <textarea rows="4" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 focus:bg-white/10 transition-all text-white placeholder-stone-600" placeholder="Type your query regarding products or project development consultancy..." required></textarea>
+            </div>
+            <button type="submit" class="w-full py-4 rounded-xl bg-brand-600 text-white font-semibold shadow-lg shadow-brand-600/20 hover:bg-brand-500 active:scale-95 transition-all duration-300">
+              Submit Message
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <hr class="border-stone-800 mb-8">
+
+      <!-- Bottom Credits -->
+      <div class="flex flex-col md:flex-row items-center justify-between text-xs text-stone-500 gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg overflow-hidden bg-white border border-stone-850 p-0.5 shadow-inner">
+            <img src="hnabc_logo.jpg" alt="HNABC Logo" class="w-full h-full object-contain">
+          </div>
+          <span>© <span x-text="new Date().getFullYear()"></span> <span x-text="data.name">HN Agri Business Corporation</span>. Proprietor: <span x-text="data.proprietor">Md. Abu Sayem</span>.</span>
+        </div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE-OVER ADMIN SIDEBAR (Alpine Drawer) -->
+  <div 
+    x-show="window.location.hash === '#admin'" 
+    class="fixed inset-0 z-50 overflow-hidden" 
+    style="display: none;"
+    role="dialog" 
+    aria-modal="true"
+  >
+    <!-- Overlay -->
+    <div 
+      x-show="window.location.hash === '#admin'" 
+      x-transition:enter="ease-in-out duration-300"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="ease-in-out duration-300"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+      @click="window.location.hash = ''"
+      class="absolute inset-0 bg-stone-950/70 transition-opacity backdrop-blur-sm"
+    ></div>
+
+    <div class="absolute inset-y-0 right-0 max-w-full flex">
+      <!-- Admin Drawer Content -->
+      <div 
+        x-show="window.location.hash === '#admin'" 
+        x-transition:enter="transform transition ease-in-out duration-300 sm:duration-500"
+        x-transition:enter-start="translate-x-full"
+        x-transition:enter-end="translate-x-0"
+        x-transition:leave="transform transition ease-in-out duration-300 sm:duration-500"
+        x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="translate-x-full"
+        class="w-screen max-w-lg glass-admin text-stone-300"
+      >
+        <div class="h-full flex flex-col shadow-2xl">
+          <!-- Header -->
+          <div x-show="authenticated">
+            <div class="px-6 py-5 border-b border-white/10 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white">
+                  <svg class="w-4 h-4 fill-none stroke-current stroke-2"><use href="#icon-settings"></use></svg>
+                </div>
+                <h2 class="font-display font-semibold text-lg text-white">Interactive Editor</h2>
+              </div>
+              <button @click="window.location.hash=''" class="w-8 h-8 rounded-lg hover:bg-white/10 flex items-center justify-center text-stone-400 hover:text-white transition-colors ml-2">
+                <svg class="w-5 h-5 fill-none stroke-current stroke-2"><use href="#icon-close"></use></svg>
+              </button>
+            </div>
+          </div>
+          <div x-show="!authenticated" class="px-6 py-5">
+            <h2 class="text-white text-lg font-semibold mb-4">Admin Login</h2>
+            <div class="space-y-3">
+              <input type="text" placeholder="Username" x-model="loginUsername" class="w-full bg-white/10 border border-white/20 rounded px-3 py-2 text-white focus:outline-none" />
+              <input type="password" placeholder="Password" x-model="loginPassword" class="w-full bg-white/10 border border-white/20 rounded px-3 py-2 text-white focus:outline-none" />
+              <div class="text-red-500 text-sm" x-show="loginError" x-text="loginError"></div>
+              <button @click="login()" class="w-full bg-brand-600 text-white py-2 rounded hover:bg-brand-500">Login</button>
+            </div>
+          </div>
+
+          <!-- Alert Note -->
+          <div class="px-6 py-3.5 bg-brand-500/10 border-b border-brand-500/20 text-brand-400 text-xs flex items-start gap-2.5">
+            <svg class="w-4 h-4 fill-none stroke-current stroke-2 shrink-0 mt-0.5"><use href="#icon-info"></use></svg>
+            <span>Edits are live-updated. Save changes to store in LocalStorage or export below.</span>
+          </div>
+
+          <!-- Admin Tabs -->
+          <div class="flex border-b border-white/10 text-[10px] font-semibold uppercase tracking-wider bg-black/20">
+            <button 
+              @click="adminTab = 'general'" 
+              class="flex-1 py-4 border-b-2 text-center" 
+              :class="adminTab === 'general' ? 'border-brand-500 text-white bg-white/5' : 'border-transparent text-stone-400 hover:text-white'"
+            >
+              General
+            </button>
+            <button 
+              @click="adminTab = 'matrix'" 
+              class="flex-1 py-4 border-b-2 text-center" 
+              :class="adminTab === 'matrix' ? 'border-brand-500 text-white bg-white/5' : 'border-transparent text-stone-400 hover:text-white'"
+            >
+              Journey & Expertise
+            </button>
+            <button 
+              @click="adminTab = 'products'" 
+              class="flex-1 py-4 border-b-2 text-center" 
+              :class="adminTab === 'products' ? 'border-brand-500 text-white bg-white/5' : 'border-transparent text-stone-400 hover:text-white'"
+            >
+              Products & Services
+            </button>
+            <button 
+              @click="adminTab = 'theme'" 
+              class="flex-1 py-4 border-b-2 text-center" 
+              :class="adminTab === 'theme' ? 'border-brand-500 text-white bg-white/5' : 'border-transparent text-stone-400 hover:text-white'"
+            >
+              Theme & Export
+            </button>
+          </div>
+
+          <!-- Drawer Scrollable Fields -->
+          <div x-show="authenticated" class="flex-1 overflow-y-auto px-6 py-6 space-y-6 custom-scrollbar-dark">
+            
+            <!-- GENERAL DETAILS TAB -->
+            <div x-show="adminTab === 'general'" class="space-y-5">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">Company Name</label>
+                <input type="text" x-model="data.name" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white">
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">Proprietor / Founder</label>
+                  <input type="text" x-model="data.proprietor" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">Role Title</label>
+                  <input type="text" x-model="data.title" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">Established</label>
+                  <input type="text" x-model="data.established" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">Company Type</label>
+                  <input type="text" x-model="data.type" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">About Section Text</label>
+                <textarea rows="4" x-model="data.about" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">Vision Statement</label>
+                <textarea rows="4" x-model="data.vision" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">Commitment</label>
+                <textarea rows="3" x-model="data.commitment" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white"></textarea>
+              </div>
+
+              <hr class="border-white/10 my-4">
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">Office Headquarters Location</label>
+                <input type="text" x-model="data.location" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white">
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">Phone</label>
+                  <input type="text" x-model="data.phone" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">Email</label>
+                  <input type="email" x-model="data.email" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500 text-white">
+                </div>
+              </div>
+            </div>
+
+            <!-- JOURNEY & EXPERTISE TAB -->
+            <div x-show="adminTab === 'matrix'" class="space-y-6">
+              <!-- Expertise Tags -->
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="text-xs font-bold uppercase tracking-widest text-brand-400">Core Strengths & Expertise</h3>
+                  <button @click="addExpertise()" class="px-2 py-1 bg-brand-600 text-white text-[10px] font-semibold rounded hover:bg-brand-500">
+                    + Add Tag
+                  </button>
+                </div>
+                <div class="flex flex-wrap gap-2 p-3 bg-white/5 border border-white/10 rounded-xl">
+                  <template x-for="(exp, index) in data.expertise" :key="index">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-stone-800 text-stone-300 text-xs font-medium">
+                      <span x-text="exp">Expertise</span>
+                      <button @click="removeExpertise(index)" class="text-stone-500 hover:text-red-400 ml-1">×</button>
+                    </span>
+                  </template>
+                </div>
+              </div>
+
+              <hr class="border-white/10 my-4">
+
+              <!-- Professional Experience Timeline -->
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-xs font-bold uppercase tracking-widest text-brand-400">Experience Timeline Matrix</h3>
+                  <button @click="addJourney()" class="px-2 py-1 bg-brand-600 text-white text-[10px] font-semibold rounded hover:bg-brand-500">
+                    + Add Milestone
+                  </button>
+                </div>
+
+                <div class="space-y-4">
+                  <template x-for="(job, index) in data.journey" :key="index">
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10 relative">
+                      <button 
+                        @click="removeJourney(index)" 
+                        class="absolute top-4 right-4 text-stone-500 hover:text-red-400 text-sm font-bold"
+                        title="Remove Milestone"
+                      >
+                        ✕
+                      </button>
+
+                      <div class="space-y-2">
+                        <div>
+                          <label class="block text-[9px] font-bold uppercase text-stone-400 mb-0.5">Role Title</label>
+                          <input type="text" x-model="job.role" class="w-full bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-brand-500">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                          <div>
+                            <label class="block text-[9px] font-bold uppercase text-stone-400 mb-0.5">Institution / Company</label>
+                            <input type="text" x-model="job.company" class="w-full bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-brand-500">
+                          </div>
+                          <div>
+                            <label class="block text-[9px] font-bold uppercase text-stone-400 mb-0.5">Period (e.g. 2018 - Present)</label>
+                            <input type="text" x-model="job.period" class="w-full bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-brand-500">
+                          </div>
+                        </div>
+                        <div>
+                          <label class="block text-[9px] font-bold uppercase text-stone-400 mb-0.5">Description Details</label>
+                          <textarea rows="2" x-model="job.details" class="w-full bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-brand-500"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRODUCTS & SERVICES TAB -->
+            <div x-show="adminTab === 'products'" class="space-y-6">
+              <!-- Products catalog -->
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-xs font-bold uppercase tracking-widest text-brand-400">Products Catalog Portfolio</h3>
+                  <button @click="addProduct()" class="px-2 py-1 bg-brand-600 text-white text-[10px] font-semibold rounded hover:bg-brand-500">
+                    + Add Product
+                  </button>
+                </div>
+
+                <div class="space-y-4">
+                  <template x-for="(prod, idx) in data.products" :key="prod.id">
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10 relative">
+                      <button @click="removeProduct(idx)" class="absolute top-4 right-4 text-stone-500 hover:text-red-400 text-sm">✕</button>
+                      <div class="space-y-2">
+                        <div>
+                          <label class="block text-[9px] font-bold uppercase text-stone-400 mb-0.5">Product Name</label>
+                          <input type="text" x-model="prod.name" class="w-full bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white">
+                        </div>
+                        <div>
+                          <label class="block text-[9px] font-bold uppercase text-stone-400 mb-0.5">Description</label>
+                          <textarea rows="2" x-model="prod.description" class="w-full bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+
+              <hr class="border-white/10 my-4">
+
+              <!-- Services set -->
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-xs font-bold uppercase tracking-widest text-brand-400">Professional Services Set</h3>
+                  <button @click="addService()" class="px-2 py-1 bg-brand-600 text-white text-[10px] font-semibold rounded hover:bg-brand-500">
+                    + Add Service
+                  </button>
+                </div>
+
+                <div class="space-y-4">
+                  <template x-for="(srv, idx) in data.services" :key="srv.id">
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10 relative">
+                      <button @click="removeService(idx)" class="absolute top-4 right-4 text-stone-500 hover:text-red-400 text-sm">✕</button>
+                      <div class="space-y-2">
+                        <div>
+                          <label class="block text-[9px] font-bold uppercase text-stone-400 mb-0.5">Service Title</label>
+                          <input type="text" x-model="srv.title" class="w-full bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white">
+                        </div>
+                        <div>
+                          <label class="block text-[9px] font-bold uppercase text-stone-400 mb-0.5">Description</label>
+                          <textarea rows="2" x-model="srv.description" class="w-full bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+
+            <!-- THEME & EXPORT TAB -->
+            <div x-show="adminTab === 'theme'" class="space-y-6">
+              <!-- Color Themes -->
+              <div>
+                <h3 class="text-xs font-bold uppercase tracking-widest text-brand-400 mb-3">Color Scheme Palette</h3>
+                <div class="grid grid-cols-2 gap-3">
+                  <button 
+                    @click="data.theme.current = 'emerald'" 
+                    class="p-4 rounded-2xl border flex items-center gap-3 transition-all duration-300"
+                    :class="data.theme.current === 'emerald' ? 'bg-emerald-950/40 border-emerald-500 text-white' : 'bg-white/5 border-white/10 text-stone-400 hover:bg-white/10'"
+                  >
+                    <div class="w-6 h-6 rounded-full bg-emerald-500 shrink-0"></div>
+                    <div class="text-left">
+                      <span class="block text-xs font-bold">Forest Emerald</span>
+                    </div>
+                  </button>
+
+                  <button 
+                    @click="data.theme.current = 'amber'" 
+                    class="p-4 rounded-2xl border flex items-center gap-3 transition-all duration-300"
+                    :class="data.theme.current === 'amber' ? 'bg-amber-950/40 border-amber-500 text-white' : 'bg-white/5 border-white/10 text-stone-400 hover:bg-white/10'"
+                  >
+                    <div class="w-6 h-6 rounded-full bg-amber-500 shrink-0"></div>
+                    <div class="text-left">
+                      <span class="block text-xs font-bold">Golden Amber</span>
+                    </div>
+                  </button>
+
+                  <button 
+                    @click="data.theme.current = 'ocean'" 
+                    class="p-4 rounded-2xl border flex items-center gap-3 transition-all duration-300"
+                    :class="data.theme.current === 'ocean' ? 'bg-sky-950/40 border-sky-500 text-white' : 'bg-white/5 border-white/10 text-stone-400 hover:bg-white/10'"
+                  >
+                    <div class="w-6 h-6 rounded-full bg-sky-500 shrink-0"></div>
+                    <div class="text-left">
+                      <span class="block text-xs font-bold">Deep Ocean</span>
+                    </div>
+                  </button>
+
+                  <button 
+                    @click="data.theme.current = 'forest'" 
+                    class="p-4 rounded-2xl border flex items-center gap-3 transition-all duration-300"
+                    :class="data.theme.current === 'forest' ? 'bg-stone-900/80 border-stone-500 text-white' : 'bg-white/5 border-white/10 text-stone-400 hover:bg-white/10'"
+                  >
+                    <div class="w-6 h-6 rounded-full bg-stone-500 shrink-0"></div>
+                    <div class="text-left">
+                      <span class="block text-xs font-bold">Eco Sage</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <hr class="border-white/10 my-4">
+
+              <!-- Data Export -->
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="text-xs font-bold uppercase tracking-widest text-brand-400">Export siteData.js Code</h3>
+                  <button 
+                    @click="copyExportCode()" 
+                    class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-xs transition-colors"
+                  >
+                    Copy JavaScript
+                  </button>
+                </div>
+                <p class="text-xs text-stone-400 mb-3 font-light">Copy this code block and paste it directly into `siteData.js` to persist changes forever in source control.</p>
+                <textarea 
+                  readonly 
+                  rows="8" 
+                  class="w-full bg-black/40 border border-white/10 rounded-xl p-4 text-[10px] font-mono focus:outline-none text-brand-300 custom-scrollbar-dark selection:bg-brand-600/30"
+                  x-text="getExportCode()"
+                ></textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Drawer Footer (Save / Reset) -->
+          <div class="px-6 py-5 border-t border-white/10 bg-black/40 grid grid-cols-2 gap-4">
+            <button 
+              @click="resetDefaults()" 
+              class="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white font-semibold text-xs tracking-wider uppercase hover:bg-white/10 active:scale-95 transition-all duration-300"
+            >
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2"><use href="#icon-refresh"></use></svg>
+              <span>Reset Defaults</span>
+            </button>
+            <button 
+              @click="saveChanges()" 
+              class="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs tracking-wider uppercase active:scale-95 transition-all duration-300 shadow-lg shadow-brand-600/20"
+            >
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2"><use href="#icon-check"></use></svg>
+              <span>Save Changes</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="fixed bottom-6 left-6 z-50 flex flex-col gap-3 w-80 max-w-full pointer-events-none">
+    <template x-for="t in toasts" :key="t.id">
+      <div 
+        x-show="true"
+        x-transition:enter="transform transition ease-out duration-300"
+        x-transition:enter-start="translate-y-4 opacity-0 scale-95"
+        x-transition:enter-end="translate-y-0 opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-90"
+        class="pointer-events-auto p-4 rounded-2xl flex items-start gap-3 shadow-lg backdrop-blur-md shadow-stone-950/20 bg-stone-900/95 border border-white/10 text-white"
+      >
+        <div class="w-6 h-6 rounded-lg bg-white/15 flex items-center justify-center text-brand-400 shrink-0">
+          <svg class="w-4 h-4 fill-none stroke-current stroke-2 text-brand-400">
+            <use :href="t.type === 'success' ? '#icon-check' : '#icon-info'"></use>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <span class="block text-xs font-semibold" x-text="t.message">Changes saved!</span>
+        </div>
+        <button @click="removeToast(t.id)" class="text-stone-400 hover:text-white transition-colors shrink-0">
+          <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-2"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+    </template>
+  </div>
+
+  <!-- PALETTE DEFINITIONS & CONTROLLER -->
+  <script>
+    // Theme colors to push into CSS custom properties
+    const themePalettes = {
+      emerald: {
+        brand: {
+          50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7', 400: '#34d399',
+          500: '#10b981', 600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b'
+        },
+        accent: {
+          50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24',
+          500: '#f59e0b', 600: '#d97706', 700: '#b45309', 800: '#92400e', 900: '#78350f'
+        }
+      },
+      amber: {
+        brand: {
+          50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24',
+          500: '#f59e0b', 600: '#d97706', 700: '#b45309', 800: '#92400e', 900: '#78350f'
+        },
+        accent: {
+          50: '#fef2f2', 100: '#fee2e2', 200: '#fecaca', 300: '#fca5a5', 400: '#f87171',
+          500: '#ef4444', 600: '#dc2626', 700: '#b91c1c', 800: '#991b1b', 900: '#7f1d1d'
+        }
+      },
+      ocean: {
+        brand: {
+          50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc', 400: '#38bdf8',
+          500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0c4a6e'
+        },
+        accent: {
+          50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa',
+          500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9', 800: '#5b21b6', 900: '#4c1d95'
+        }
+      },
+      forest: {
+        brand: {
+          50: '#f2f5ee', 100: '#e4ebda', 200: '#cbdbb7', 300: '#abc68b', 400: '#8cae65',
+          500: '#6c9143', 600: '#537232', 700: '#3c5224', 800: '#273617', 900: '#151d0c'
+        },
+        accent: {
+          50: '#fffdf5', 100: '#fef9e1', 200: '#fdf1be', 300: '#fbe492', 400: '#fad665',
+          500: '#f8c538', 600: '#d9a322', 700: '#b48117', 800: '#90620f', 900: '#754d09'
+        }
+      }
+    };
+  </script>
+
+  <!-- Import site data as ES module and initialize Alpine securely -->
+  <script type="module">
+    import { initialSiteData } from './siteData.js';
+    
+    document.addEventListener('alpine:init', () => {
+      // Ensure theme current color is initialized
+      if (!initialSiteData.theme) {
+        initialSiteData.theme = { current: 'emerald' };
+      }
+      
+      Alpine.data('siteApp', () => {
+        // Load data from localStorage or initialSiteData
+        const localData = localStorage.getItem('hnabc_siteData');
+        const dataState = localData ? JSON.parse(localData) : JSON.parse(JSON.stringify(initialSiteData));
+        if (!dataState.theme) dataState.theme = { current: 'emerald' };
+
+        return {
+          data: dataState,
+          adminOpen: false,
+          adminTab: 'general',
+          toasts: [],
+          // Authentication state for admin login
+          authenticated: false,
+          loginError: '',
+          loginUsername: '',
+          loginPassword: ''
+
+          get themeStyles() {
+            const currentTheme = this.data.theme && this.data.theme.current ? this.data.theme.current : 'emerald';
+            const palette = themePalettes[currentTheme] || themePalettes.emerald;
+            let styles = '';
+            for (const group in palette) {
+              for (const shade in palette[group]) {
+                styles += `--color-${group}-${shade}: ${palette[group][shade]}; `;
+              }
+            }
+            return styles;
+          },
+
+          saveChanges() {
+            localStorage.setItem('hnabc_siteData', JSON.stringify(this.data));
+            this.pushToast('success', 'All modifications successfully persisted to LocalStorage!');
+            this.adminOpen = false;
+          },
+
+          resetDefaults() {
+            if (confirm('Are you sure you want to revert to defaults? This will erase browser overrides.')) {
+              localStorage.removeItem('hnabc_siteData');
+              this.data = JSON.parse(JSON.stringify(initialSiteData));
+              if (!this.data.theme) this.data.theme = { current: 'emerald' };
+              this.pushToast('info', 'Reset complete. Site restored to defaults.');
+              this.adminOpen = false;
+            }
+          },
+
+          addJourney() {
+            this.data.journey.push({
+              role: "Consultant / Manager",
+              company: "New Business Corporation",
+              period: "2024 - Present",
+              details: "Description of your key duties and accomplishments."
+            });
+            this.pushToast('info', 'New journey milestone added.');
+          },
+
+          removeJourney(index) {
+            this.data.journey.splice(index, 1);
+            this.pushToast('info', 'Journey milestone removed.');
+          },
+
+          addExpertise() {
+            const skill = prompt("Enter new expertise tag:");
+            if (skill && skill.trim()) {
+              this.data.expertise.push(skill.trim());
+              this.pushToast('info', `Added "${skill.trim()}" to expertise list.`);
+            }
+          },
+
+          removeExpertise(index) {
+            this.data.expertise.splice(index, 1);
+            this.pushToast('info', 'Expertise item removed.');
+          },
+
+          addProduct() {
+            const newId = 'prod_' + Date.now();
+            this.data.products.push({
+              id: newId,
+              name: "New Quality Seed/Product",
+              description: "Description of structural attributes and culinary/industrial value."
+            });
+            this.pushToast('info', 'New product card added.');
+          },
+
+          removeProduct(index) {
+            this.data.products.splice(index, 1);
+            this.pushToast('info', 'Product removed.');
+          },
+
+          addService() {
+            const newId = 'srv_' + Date.now();
+            this.data.services.push({
+              id: newId,
+              title: "New Consultancy Support",
+              description: "Assisting in trade logistics and project appraisal management parameters."
+            });
+            this.pushToast('info', 'New service card added.');
+          },
+
+          removeService(index) {
+            this.data.services.splice(index, 1);
+            this.pushToast('info', 'Service removed.');
+          },
+
+          // Authentication logic
+          login() {
+            if (this.loginUsername === 'HNABC' && this.loginPassword === 'HNABC123') {
+              this.authenticated = true;
+              this.loginError = '';
+              this.pushToast('success', 'Authenticated successfully.');
+            } else {
+              this.loginError = 'Invalid username or password.';
+              this.pushToast('error', this.loginError);
+            }
+          },
+          // Initialize admin route handling
+          init() {
+            const checkHash = () => {
+              if (window.location.hash === '#admin') {
+                this.adminOpen = true;
+              } else {
+                this.adminOpen = false;
+                this.authenticated = false;
+              }
+            };
+            checkHash();
+            window.addEventListener('hashchange', checkHash);
+          },
+
+          pushToast(type, message) {
+            const id = Date.now() + Math.random().toString(36).substr(2, 5);
+            this.toasts.push({ id, type, message });
+            setTimeout(() => this.removeToast(id), 4000);
+          },
+
+          removeToast(id) {
+            this.toasts = this.toasts.filter(t => t.id !== id);
+          },
+
+          getExportCode() {
+            const exportObj = JSON.parse(JSON.stringify(this.data));
+            return `export const initialSiteData = ${JSON.stringify(exportObj, null, 2)};`;
+          },
+
+          copyExportCode() {
+            const code = this.getExportCode();
+            navigator.clipboard.writeText(code).then(() => {
+              this.pushToast('success', 'JavaScript export code copied to clipboard!');
+            }).catch(err => {
+              this.pushToast('error', 'Failed to copy to clipboard.');
+            });
+          }
+        };
+      });
+    });
+
+    // Dynamic Alpine Loader - registers siteApp listener before downloading Alpine library.
+    // This solves the race condition of Alpine resolving siteApp() before ES Module registers it.
+    const script = document.createElement('script');
+    script.src = "https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js";
+    script.defer = true;
+    document.head.appendChild(script);
+  </script>
+</body>
+</html>
