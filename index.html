@@ -20,7 +20,7 @@
             --color-accent-300: #fcd34d; --color-accent-400: #fbbf24; --color-accent-500: #f59e0b;
             --color-accent-600: #d97706; --color-accent-700: #b45309; --color-accent-800: #92400e; --color-accent-900: #78350f;
         }
-        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-b: 1px solid rgba(229, 231, 235, 0.5); }
+        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(229, 231, 235, 0.5); }
         .timeline-line { position: absolute; left: 17px; top: 36px; bottom: -16px; width: 2px; background: var(--color-brand-200); }
         .timeline-item:last-child .timeline-line { display: none; }
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
@@ -41,18 +41,341 @@
                 getFallbackData() {
                     return {
                         name: 'HN Agri Business Corporation', shortName: 'HNABC', logoUrl: 'logo.png',
-                        bannerUrl: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?q=80&w=1600&auto=format&fit=crop',
+                        bannerUrl: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=1600',
                         proprietor: 'Md. Abu Sayem', title: 'Chairman', proprietorImage: './proprietor.jpg', established: '2018', type: 'Private Company',
                         location: 'AILCHARA BAZAR, KUSHTIA SADAR, KUSHTIA, BANGLADESH', phone: '+8801714718312', email: 'sayemrscbd@gmail.com',
-                        about: 'HN Agri Business Corporation provides top-tier innovative agricultural trading, commercial management solutions, and project infrastructure consultancy.',
-                        vision: 'To advance national agriculture by driving sustainable cultivation operations, securing staple foods distribution chains, and delivering institutional grade agribusiness values.',
-                        commitment: 'We prioritize product purity, supply chain sustainability, and partner satisfaction across every transactional tier.',
+                        about: 'HN Agri Business Corporation is a testament to innovation, sustainability, and the relentless pursuit of excellence in agricultural trading, commercial management, and project consultancy.',
+                        vision: 'To play a pivotal role in advancing national agriculture, serving as a catalyst for growth and sustainability across the region.',
+                        commitment: 'We are committed to promoting sustainable agriculture practices, ensuring food security, and prioritizing premium customer satisfaction.',
                         journey: [
-                            { role: 'Consultant - Business and Project Development', company: 'HNABC', period: '2018 - Present', details: 'Provide technical consultation frameworks for bio-chemical products and modern rice milling installations.' },
-                            { role: 'Executive Director', company: 'East West Chemicals Limited, Dhaka', period: '2017 - 2018', details: 'Managed business operations and high-volume raw material procurement systems.' }
+                            { role: 'Consultant - Business and Project Development', company: 'HNABC', period: '2018 - Present', details: 'Provide technology support services and consulting for various bio-chemical products and rice milling infrastructure.' }
                         ],
                         expertise: ['Agri Green Projects', 'Solvent Extraction', 'Rice Mill Automation', 'Project Management', 'Foreign Trade Business'],
                         products: [
-                            { id: '1', name: 'Premium Quality Rice', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600', description: 'Polished long-grain and aromatic variants processed cleanly for consumer channels.' },
-                            { id: '2', name: 'Processed Broken Rice', image: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=600', description: 'Meticulously graded grain fractions ready for institutional production loops.' },
-                            { id: '3', name: 'High-Yield Rice Bran', image: '
+                            { id: '1', name: 'Premium Quality Rice', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600', description: 'Cultivated and supplied to meet strict quality parameters.' },
+                            { id: '2', name: 'Processed Broken Rice', image: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=600', description: 'Widely used in culinary and institutional processing applications.' },
+                            { id: '3', name: 'High-Yield Rice Bran', image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=600', description: 'Essential byproduct processed cleanly for oil extraction.' },
+                            { id: '4', name: 'Nutritional Oil Cake', image: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600', description: 'Valuable protein source for livestock and feed mill processors.' },
+                            { id: '5', name: 'Diverse Pulses Portfolio', image: 'https://images.unsplash.com/photo-1547058881-aa0edd92aab3?w=600', description: 'High-purity lentils and core legume selections for the domestic market.' },
+                            { id: '6', name: 'Premium Edible Oil', image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600', description: 'Extracted carefully from fine seeds, ensuring excellent household clarity.' }
+                        ],
+                        services: [
+                            { id: '1', title: 'Project Appraisal', description: 'Evaluating and analyzing strategic agribusiness development models.' }
+                        ],
+                        whyChooseUs: [
+                            { title: 'Quality Assurance', desc: 'Stringent metrics governing reliable commodity distributions.' }
+                        ],
+                        theme: { current: 'emerald' }
+                    };
+                },
+                init() {
+                    const fallback = this.getFallbackData();
+                    const local = localStorage.getItem('hnabc_data');
+                    if (local) {
+                        this.site = Object.assign({}, fallback, JSON.parse(local));
+                    } else {
+                        this.site = fallback;
+                        localStorage.setItem('hnabc_data', JSON.stringify(fallback));
+                    }
+                    import('./siteData.js')
+                        .then(m => {
+                            if (!local) {
+                                this.site = Object.assign({}, fallback, m.initialSiteData);
+                                localStorage.setItem('hnabc_data', JSON.stringify(this.site));
+                            }
+                        })
+                        .catch(() => console.log("System handling inline arrays smoothly."));
+
+                    window.addEventListener('hashchange', () => { this.currentHash = window.location.hash; });
+                },
+                submitLogin() {
+                    if (this.inputUser === 'HNABC' && this.inputPass === 'HNABC123') {
+                        this.isAuthenticated = true;
+                        localStorage.setItem('hnabc_auth', 'true');
+                        this.loginError = '';
+                        this.pushToast('success', 'Authenticated successfully!');
+                    } else {
+                        this.loginError = 'Access Denied: Invalid Credentials.';
+                        this.pushToast('error', 'Login entry blocked.');
+                    }
+                },
+                logout() {
+                    this.isAuthenticated = false;
+                    localStorage.removeItem('hnabc_auth');
+                    window.location.hash = '';
+                    this.inputUser = ''; this.inputPass = '';
+                    this.pushToast('info', 'Secure session closed.');
+                },
+                saveData() {
+                    localStorage.setItem('hnabc_data', JSON.stringify(this.site));
+                    this.pushToast('success', 'Changes applied and synchronized successfully!');
+                    window.location.hash = '';
+                },
+                resetDefaults() {
+                    if (confirm('Revert content modifications back to defaults?')) {
+                        localStorage.removeItem('hnabc_data');
+                        this.site = this.getFallbackData();
+                        this.pushToast('info', 'Restored pristine code defaults.');
+                    }
+                },
+                addJourney() {
+                    this.site.journey.push({ role: 'Consultant / Manager', company: 'HNABC Corporate', period: '2026', details: 'Operational optimization execution framework milestones.' });
+                },
+                removeJourney(idx) { this.site.journey.splice(idx, 1); },
+                addExpertise() {
+                    const skill = prompt('Enter expertise tag:');
+                    if (skill && skill.trim()) this.site.expertise.push(skill.trim());
+                },
+                removeExpertise(idx) { this.site.expertise.splice(idx, 1); },
+                addProduct() {
+                    this.site.products.push({ id: Date.now().toString(), name: 'New Premium Commodity', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600', description: 'Premium commodity catalog item spec detailing specifications.' });
+                },
+                removeProduct(idx) { this.site.products.splice(idx, 1); },
+                addService() {
+                    this.site.services.push({ id: Date.now().toString(), title: 'New Advisory Support', description: 'Consultation infrastructure strategy execution matrix.' });
+                },
+                removeService(idx) { this.site.services.splice(idx, 1); },
+                pushToast(type, message) {
+                    const id = Date.now().toString();
+                    this.toasts.push({ id, type, message });
+                    setTimeout(() => this.removeToast(id), 3500);
+                },
+                removeToast(id) { this.toasts = this.toasts.filter(t => t.id !== id); },
+                getExportCode() { return 'export const initialSiteData = ' + JSON.stringify(this.site, null, 2) + ';'; },
+                copyExportCode() {
+                    navigator.clipboard.writeText(this.getExportCode())
+                        .then(() => this.pushToast('success', 'Copied to clipboard!'))
+                        .catch(() => this.pushToast('error', 'Copy blocked by interface.'));
+                },
+                get themeStyles() {
+                    const themes = {
+                        emerald: { brand: '#10b981', brandBg: '#ecfdf5', brandDark: '#047857' },
+                        amber: { brand: '#f59e0b', brandBg: '#fffbeb', brandDark: '#b45309' },
+                        ocean: { brand: '#0ea5e9', brandBg: '#f0f9ff', brandDark: '#0369a1' },
+                        forest: { brand: '#6c9143', brandBg: '#f2f5ee', brandDark: '#3c5224' }
+                    };
+                    const sel = themes[this.site.theme?.current || 'emerald'];
+                    return `--color-brand-50: ${sel.brandBg}; --color-brand-500: ${sel.brand}; --color-brand-700: ${sel.brandDark};`;
+                }
+            };
+        }
+    </script>
+</head>
+<body class="bg-stone-50 font-sans antialiased text-stone-700 selection:bg-stone-900 selection:text-white" :style="themeStyles" x-data="siteComponent()">
+
+    <svg class="hidden">
+        <g id="icon-leaf"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 0 8.5C17 15 15 20 11 20z" fill="none" stroke="currentColor" stroke-width="2"></path></g>
+        <g id="icon-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" fill="none" stroke="currentColor" stroke-width="2"></path></g>
+        <g id="icon-settings"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" fill="none" stroke="currentColor" stroke-width="2"></path></g>
+        <g id="icon-close"><line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2"></line><line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2"></line></g>
+        <g id="icon-plus"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2"></line><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2"></line></g>
+        <g id="icon-trash"><polyline points="3 6 5 6 21 6" fill="none" stroke="currentColor" stroke-width="2"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="2"></path></g>
+        <g id="icon-check"><polyline points="20 6 9 17 4 12" fill="none" stroke="currentColor" stroke-width="2"></polyline></g>
+    </svg>
+
+    <div x-show="currentHash !== '#admin'" x-cloak>
+        <nav class="fixed top-0 inset-x-0 z-40 glass-nav h-20 px-4 md:px-8 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg overflow-hidden border bg-white flex items-center justify-center p-0.5 shadow-sm">
+                    <img :src="site.logoUrl || 'logo.png'" alt="Logo" class="w-full h-full object-contain">
+                </div>
+                <span class="font-display font-extrabold text-sm md:text-base tracking-tight text-stone-900" x-text="site.name"></span>
+            </a>
+            <button @click="window.location.hash = '#admin'" class="px-4 py-2 bg-stone-900 text-white font-bold text-xs rounded-xl tracking-wider uppercase hover:bg-brand-500 transition-colors cursor-pointer flex items-center gap-2">
+                <svg class="w-3.5 h-3.5"><use href="#icon-settings"></use></svg>
+                <span>Gateway Panel</span>
+            </button>
+        </nav>
+
+        <header class="relative min-h-[80vh] flex items-center justify-center pt-28 pb-16 bg-stone-950 text-white text-center px-4">
+            <div class="absolute inset-0">
+                <img :src="site.bannerUrl" class="w-full h-full object-cover opacity-25">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-900/80 to-transparent"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto space-y-6">
+                <span class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[10px] font-bold uppercase tracking-widest text-brand-400" x-text="(site.type || 'Corporation') + ' • Est. ' + (site.established || '2018')"></span>
+                <h1 class="font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight leading-tight" x-text="site.name"></h1>
+                <p class="max-w-2xl mx-auto text-sm md:text-base text-stone-300 font-light" x-text="site.about"></p>
+                <div class="flex gap-4 justify-center pt-2">
+                    <a href="#about" class="px-6 py-3 bg-brand-500 rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg shadow-brand-500/20 text-center">Profile</a>
+                    <a href="#products" class="px-6 py-3 bg-white/10 rounded-xl font-bold text-xs uppercase tracking-wider text-center border border-white/10">Catalog</a>
+                </div>
+            </div>
+        </header>
+
+        <section id="about" class="py-20 max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-12 gap-12 items-start">
+            <div class="lg:col-span-7 space-y-6">
+                <span class="text-xs font-bold text-brand-700 uppercase tracking-widest">Strategy & Vision</span>
+                <p class="text-xl md:text-2xl font-serif italic text-stone-900" x-text="'&ldquo;' + site.vision + '&rdquo;'"></p>
+                <div class="p-5 rounded-2xl bg-brand-50 text-xs md:text-sm text-stone-600 leading-relaxed" x-text="site.commitment"></div>
+            </div>
+            <div class="lg:col-span-5 p-6 rounded-2xl bg-white border shadow-sm space-y-4">
+                <div class="flex items-center gap-4 border-b pb-4">
+                    <div class="w-14 h-14 bg-stone-900 rounded-xl text-white font-display font-bold text-lg flex items-center justify-center">AS</div>
+                    <div>
+                        <h3 class="font-display font-bold text-base text-stone-900" x-text="site.proprietor"></h3>
+                        <span class="text-xs text-brand-700 font-medium uppercase" x-text="site.title"></span>
+                    </div>
+                </div>
+                <h4 class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">Expertise Infrastructure Matrix</h4>
+                <div class="flex flex-wrap gap-1.5">
+                    <template x-for="tag in site.expertise">
+                        <span class="px-2.5 py-1 rounded bg-stone-100 text-stone-600 text-xs" x-text="tag"></span>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="py-20 bg-stone-100 border-y">
+            <div class="max-w-7xl mx-auto px-4 md:px-8">
+                <h2 class="font-display font-black text-2xl md:text-3xl text-stone-900 text-center mb-12">Core Agricultural Commodities</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <template x-for="prod in site.products" :key="prod.id">
+                        <div class="bg-white rounded-2xl border overflow-hidden flex flex-col hover:scale-[1.01] transition-transform shadow-sm">
+                            <div class="h-44 bg-stone-200">
+                                <img :src="prod.image" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                                <div class="space-y-1">
+                                    <h3 class="font-bold text-stone-950 text-base" x-text="prod.name"></h3>
+                                    <p class="text-xs text-stone-500 leading-relaxed" x-text="prod.description"></p>
+                                </div>
+                                <span class="text-[10px] font-bold text-brand-700 tracking-wider uppercase">Institutional Supply Grade</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-20 max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-3 gap-6">
+            <template x-for="srv in site.services" :key="srv.id">
+                <div class="p-6 bg-white border rounded-2xl shadow-sm space-y-2">
+                    <h3 class="font-display font-bold text-base text-stone-900" x-text="srv.title"></h3>
+                    <p class="text-xs text-stone-500 leading-relaxed" x-text="srv.description"></p>
+                </div>
+            </template>
+        </section>
+
+        <footer class="bg-stone-900 text-stone-400 py-12 px-4 text-center text-xs space-y-4 border-t border-stone-800">
+            <p x-text="site.location"></p>
+            <p class="text-stone-600">&copy; 2026 HNABC Corporate Infrastructure. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <div x-show="currentHash === '#admin'" class="min-h-screen flex items-center justify-center bg-stone-950 p-4" x-cloak>
+        
+        <div x-show="!isAuthenticated" class="w-full max-w-md bg-stone-900 p-6 md:p-8 rounded-2xl border border-stone-800 space-y-6 shadow-2xl">
+            <div class="text-center space-y-2">
+                <h2 class="text-xl font-bold text-white font-display">HNABC Gateway Authentication</h2>
+                <p class="text-xs text-stone-500">Authorized administrative security node credentials required.</p>
+            </div>
+            <form @submit.prevent="submitLogin()" class="space-y-4">
+                <input type="text" x-model="inputUser" placeholder="Username" class="w-full bg-stone-950 border border-stone-800 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500" required>
+                <input type="password" x-model="inputPass" placeholder="Password" class="w-full bg-stone-950 border border-stone-800 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500" required>
+                <div x-show="loginError" class="text-red-400 text-xs font-semibold" x-text="loginError"></div>
+                <button type="submit" class="w-full bg-brand-500 text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider cursor-pointer shadow-lg shadow-brand-500/20">Login Control Panel</button>
+            </form>
+            <div class="text-center"><a href="#" class="text-xs text-stone-500 hover:text-stone-300">&larr; Return to Storefront</a></div>
+        </div>
+
+        <div x-show="isAuthenticated" class="w-full max-w-4xl bg-white p-4 md:p-8 rounded-2xl shadow-2xl space-y-6 my-6 text-stone-800">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b pb-4">
+                <div>
+                    <h2 class="text-xl font-black text-stone-900 font-display">HNABC Master Administration Control Desk</h2>
+                    <p class="text-xs text-stone-500">Live deployment configuration synchronization portal.</p>
+                </div>
+                <div class="flex gap-2 w-full sm:w-auto">
+                    <button @click="logout()" class="flex-1 sm:flex-none px-4 py-2 border rounded-xl text-xs font-medium cursor-pointer">Logout</button>
+                    <button @click="saveData()" class="flex-1 sm:flex-none px-5 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer">Sync Live Build</button>
+                </div>
+            </div>
+
+            <div class="flex border rounded-xl overflow-hidden text-xs font-bold bg-stone-50">
+                <button @click="adminTab = 'general'" class="flex-1 py-3 text-center" :class="adminTab === 'general' ? 'bg-white text-emerald-600 border-b-2 border-emerald-500' : 'text-stone-500'">General Info</button>
+                <button @click="adminTab = 'catalog'" class="flex-1 py-3 text-center" :class="adminTab === 'catalog' ? 'bg-white text-emerald-600 border-b-2 border-emerald-500' : 'text-stone-500'">Catalog Items</button>
+                <button @click="adminTab = 'theme'" class="flex-1 py-3 text-center" :class="adminTab === 'theme' ? 'bg-white text-emerald-600 border-b-2 border-emerald-500' : 'text-stone-500'">Theme Export</button>
+            </div>
+
+            <div class="space-y-4 max-h-[50vh] overflow-y-auto pr-1 custom-scrollbar">
+                <div x-show="adminTab === 'general'" class="space-y-4">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-bold text-stone-500 uppercase">Profile Corporate Name</label>
+                            <input type="text" x-model="site.name" class="w-full border p-2.5 bg-stone-50 rounded-xl text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-stone-500 uppercase">Executive Identity</label>
+                            <input type="text" x-model="site.proprietor" class="w-full border p-2.5 bg-stone-50 rounded-xl text-xs">
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-bold text-stone-500 uppercase">Logo Asset URL</label>
+                            <input type="text" x-model="site.logoUrl" class="w-full border p-2.5 bg-stone-50 rounded-xl text-xs font-mono">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-stone-500 uppercase">Hero Background Banner URL</label>
+                            <input type="text" x-model="site.bannerUrl" class="w-full border p-2.5 bg-stone-50 rounded-xl text-xs font-mono">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-stone-500 uppercase">Core Narrative Profile</label>
+                        <textarea x-model="site.about" rows="3" class="w-full border p-3 bg-stone-50 rounded-xl text-xs resize-none"></textarea>
+                    </div>
+                </div>
+
+                <div x-show="adminTab === 'catalog'" class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-stone-400 uppercase">Live Commodity Loop Arrays</span>
+                        <button @click="addProduct()" class="px-3 py-1.5 bg-stone-900 text-white rounded-lg text-xs font-bold cursor-pointer">+ Append New Product Card</button>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <template x-for="(prod, idx) in site.products" :key="idx">
+                            <div class="border p-4 rounded-xl bg-stone-50/60 relative space-y-2 flex flex-col justify-between pt-10 shadow-sm">
+                                <button @click="removeProduct(idx)" class="absolute top-3 right-3 text-red-500 text-[10px] font-bold border border-red-200 bg-red-50 px-2 py-0.5 rounded cursor-pointer">✕ Remove</button>
+                                <div class="space-y-2">
+                                    <input type="text" x-model="prod.name" class="w-full border p-2 bg-white rounded-lg text-xs font-bold" placeholder="Product Name">
+                                    <input type="text" x-model="prod.image" class="w-full border p-2 bg-white rounded-lg text-xs font-mono" placeholder="ImgBB Image Link Reference">
+                                    <textarea x-model="prod.description" rows="2" class="w-full border p-2 bg-white rounded-lg text-xs resize-none" placeholder="Description Specification Details"></textarea>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div x-show="adminTab === 'theme'" class="space-y-4">
+                    <div>
+                        <span class="block text-[10px] font-bold text-stone-500 uppercase mb-2">Workspace Accent Colors</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <button @click="site.theme.current = 'emerald'" class="p-2 border rounded-lg text-xs cursor-pointer text-center" :class="site.theme.current === 'emerald' ? 'bg-emerald-50 border-emerald-500 font-bold' : ''">Emerald</button>
+                            <button @click="site.theme.current = 'amber'" class="p-2 border rounded-lg text-xs cursor-pointer text-center" :class="site.theme.current === 'amber' ? 'bg-amber-50 border-amber-500 font-bold' : ''">Amber</button>
+                            <button @click="site.theme.current = 'ocean'" class="p-2 border rounded-lg text-xs cursor-pointer text-center" :class="site.theme.current === 'ocean' ? 'bg-sky-50 border-sky-500 font-bold' : ''">Ocean</button>
+                            <button @click="site.theme.current = 'forest'" class="p-2 border rounded-lg text-xs cursor-pointer text-center" :class="site.theme.current === 'forest' ? 'bg-stone-100 border-stone-500 font-bold' : ''">Sage</button>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center"><span class="text-[10px] font-bold text-stone-500 uppercase">Export Source Array</span><button @click="copyExportCode()" class="px-2.5 py-1 bg-stone-950 text-white rounded text-[10px] font-bold cursor-pointer">Copy Module</button></div>
+                        <textarea readonly rows="5" class="w-full bg-stone-950 text-emerald-400 p-3 font-mono text-[10px] rounded-xl resize-none custom-scrollbar" x-text="getExportCode()"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t pt-4 flex justify-between items-center">
+                <button @click="resetDefaults()" class="px-4 py-2 border rounded-xl text-xs font-bold uppercase tracking-wider text-stone-400 cursor-pointer">Reset Defaults</button>
+                <button @click="saveData()" class="px-6 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer shadow-md">Sync Live Build</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed bottom-4 left-4 z-50 flex flex-col gap-2 w-72 pointer-events-none">
+        <template x-for="t in toasts" :key="t.id">
+            <div class="pointer-events-auto p-3 rounded-xl bg-stone-900/95 border border-white/10 text-white flex justify-between items-center text-xs shadow-xl backdrop-blur-md">
+                <span x-text="t.message"></span>
+                <button @click="removeToast(t.id)" class="text-stone-400 hover:text-white font-bold ml-2 cursor-pointer">&times;</button>
+            </div>
+        </template>
+    </div>
+
+</body>
+</html>
